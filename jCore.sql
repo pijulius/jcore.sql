@@ -1208,3 +1208,10 @@ INSERT INTO `blocks` (`ID`, `Title`, `Content`, `BlockID`, `Class`, `Deactivated
 (NULL, 'Admin Menu', '<ul id=''main-menu''><li class=''menu''><a href=''%SITE_URL%admin/''><span>{translate}Admin Home{/translate}</span></a></li><li class=''menu''><a href=''%SITE_URL%'' target=''_blank''><span>{translate}View Website{/translate}</span></a></li><li class=''menu''><a href=''http://jcore.net/help'' target=''_blank''><span>{translate}Get Help{/translate}</span></a></li><li class=''menu''><a href=''http://jcore.net'' target=''_blank''><span>jCore.net</span></a></li></ul>', 'header-menu', '', 0, 0, 2, 'A', 0, '', 0, 0, 0, 0, 10, '', '0000-00-00 00:00:00', 0, 1);
 
 
+-- --------------------------------------------------------
+
+-- 
+-- Modification / Changes for ver. 0.8
+-- 
+
+ALTER TABLE  `blocks` CHANGE  `Limit`  `Limit` TINYINT( 3 ) UNSIGNED NOT NULL DEFAULT  '0';
