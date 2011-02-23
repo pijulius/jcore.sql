@@ -1215,3 +1215,18 @@ INSERT INTO `blocks` (`ID`, `Title`, `Content`, `BlockID`, `Class`, `Deactivated
 -- 
 
 ALTER TABLE  `blocks` CHANGE  `Limit`  `Limit` TINYINT( 3 ) UNSIGNED NOT NULL DEFAULT  '0';
+
+RENAME TABLE `menuitems` TO `pages`;
+RENAME TABLE `menuitemmodules` TO `pagemodules`;
+ALTER TABLE  `pages` CHANGE  `SubMenuOfID`  `SubPageOfID` MEDIUMINT( 8 ) UNSIGNED NOT NULL DEFAULT  '0';
+ALTER TABLE  `pagemodules` CHANGE  `MenuItemID`  `PageID` MEDIUMINT( 8 ) UNSIGNED NOT NULL DEFAULT  '0';
+
+ALTER TABLE  `blocks` CHANGE  `MenuItemIDs`  `PageIDs` VARCHAR( 255 ) NOT NULL ,
+CHANGE  `MenuItemExcept`  `PageExcept` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0';
+
+ALTER TABLE  `posts` CHANGE  `MenuItemID`  `PageID` MEDIUMINT( 8 ) UNSIGNED NOT NULL;
+ALTER TABLE  `postkeywords` CHANGE  `MenuItemIDs`  `PageIDs` VARCHAR( 255 ) NOT NULL DEFAULT  '';
+
+UPDATE `favoritelinks` SET `Link` = REPLACE(`Link`, 'admin/content/menuitems', 'admin/content/pages');
+UPDATE `dynamicforms` SET `BrowseDataURL` = REPLACE(`BrowseDataURL`, 'admin/content/menuitems', 'admin/content/postsatglance');
+UPDATE `userpermissions` SET `Path` = REPLACE(`Path`, 'admin/content/menuitems', 'admin/content/pages');
