@@ -1214,7 +1214,7 @@ INSERT INTO `blocks` (`ID`, `Title`, `Content`, `BlockID`, `Class`, `Deactivated
 -- Modification / Changes for ver. 0.8
 -- 
 
-ALTER TABLE  `blocks` CHANGE  `Limit`  `Limit` TINYINT( 3 ) UNSIGNED NOT NULL DEFAULT  '0';
+-- Affecting all versions
 
 RENAME TABLE `menuitems` TO `pages`;
 RENAME TABLE `menuitemmodules` TO `pagemodules`;
@@ -1230,3 +1230,8 @@ ALTER TABLE  `postkeywords` CHANGE  `MenuItemIDs`  `PageIDs` VARCHAR( 255 ) NOT 
 UPDATE `favoritelinks` SET `Link` = REPLACE(`Link`, 'admin/content/menuitems', 'admin/content/pages');
 UPDATE `dynamicforms` SET `BrowseDataURL` = REPLACE(`BrowseDataURL`, 'admin/content/menuitems', 'admin/content/postsatglance');
 UPDATE `userpermissions` SET `Path` = REPLACE(`Path`, 'admin/content/menuitems', 'admin/content/pages');
+
+-- Only in 0.8
+
+ALTER TABLE  `blocks` CHANGE  `Limit`  `Limit` TINYINT( 3 ) UNSIGNED NOT NULL DEFAULT  '0';
+ALTER TABLE  `pages` ADD  `PostKeywords` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFTER  `Link`;
