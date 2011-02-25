@@ -1172,7 +1172,7 @@ ADD INDEX (  `MenuItemIDs` );
 DROP TABLE IF EXISTS `templates`;
 CREATE TABLE `templates` (
   `ID` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `Name` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`ID`),
   KEY `Name` (`Name`)
 ) ENGINE=MyISAM;
@@ -1238,3 +1238,23 @@ ALTER TABLE  `pages` ADD  `PostKeywords` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFT
 
 INSERT INTO `settings` (`ID`, `Value`, `TypeID`, `OrderID`) VALUES 
 ('Instant_User_Registration', '0', '3', '6');
+
+DROP TABLE IF EXISTS `usergroups`;
+CREATE TABLE `usergroups` (
+  `ID` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `GroupName` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM;
+
+DROP TABLE IF EXISTS `usergrouppermissions`;
+CREATE TABLE `usergrouppermissions` (
+  `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `GroupID` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `Path` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `PermissionTypeID` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`),
+  KEY `UserID` (`GroupID`,`Path`)
+) ENGINE=MyISAM;
+
+ALTER TABLE  `users` ADD  `GroupID` SMALLINT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `ID` ,
+ADD INDEX (  `GroupID` );
