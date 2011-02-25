@@ -1235,3 +1235,6 @@ UPDATE `userpermissions` SET `Path` = REPLACE(`Path`, 'admin/content/menuitems',
 
 ALTER TABLE  `blocks` CHANGE  `Limit`  `Limit` TINYINT( 3 ) UNSIGNED NOT NULL DEFAULT  '0';
 ALTER TABLE  `pages` ADD  `PostKeywords` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFTER  `Link`;
+
+INSERT INTO `settings` (`ID`, `Value`, `TypeID`, `OrderID`) VALUES 
+('Instant_User_Registration', '0', '3', '6');
