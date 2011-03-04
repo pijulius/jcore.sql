@@ -1258,3 +1258,5 @@ CREATE TABLE `usergrouppermissions` (
 
 ALTER TABLE  `users` ADD  `GroupID` SMALLINT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `ID` ,
 ADD INDEX (  `GroupID` );
+
+DELETE FROM `dynamicformfields` WHERE `Name` = 'BlockID' AND `Protected` = 1;
