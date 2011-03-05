@@ -1256,3 +1256,9 @@ ALTER TABLE  `users` ADD  `GroupID` SMALLINT UNSIGNED NOT NULL DEFAULT  '0' AFTE
 ADD INDEX (  `GroupID` );
 
 DELETE FROM `dynamicformfields` WHERE `Name` = 'BlockID' AND `Protected` = 1;
+
+ALTER TABLE  `dynamicforms` ADD  `SendAutoResponse` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `SendNotificationEmailTo` ,
+ADD  `AutoResponseFrom` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFTER  `SendAutoResponse` ,
+ADD  `AutoResponseSubject` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFTER  `AutoResponseFrom` ,
+ADD  `AutoResponseMessage` MEDIUMTEXT NULL DEFAULT NULL AFTER  `AutoResponseSubject`;
+
