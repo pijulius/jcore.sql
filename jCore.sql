@@ -1262,3 +1262,5 @@ ADD  `AutoResponseFrom` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFTER  `SendAutoResp
 ADD  `AutoResponseSubject` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFTER  `AutoResponseFrom` ,
 ADD  `AutoResponseMessage` MEDIUMTEXT NULL DEFAULT NULL AFTER  `AutoResponseSubject`;
 
+ALTER TABLE  `dynamicforms` ADD INDEX (  `FormID` );
+ALTER TABLE  `modules` ADD INDEX (  `Name` );
