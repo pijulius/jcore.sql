@@ -1264,3 +1264,6 @@ ADD  `AutoResponseMessage` MEDIUMTEXT NULL DEFAULT NULL AFTER  `AutoResponseSubj
 
 ALTER TABLE  `dynamicforms` ADD INDEX (  `FormID` );
 ALTER TABLE  `modules` ADD INDEX (  `Name` );
+
+UPDATE  `settings` SET  `TypeID` =  '10' WHERE  `ID` =  'Security_Image_Foreground_Color';
+UPDATE  `settings` SET  `TypeID` =  '10' WHERE  `ID` =  'Security_Image_Background_Color';
