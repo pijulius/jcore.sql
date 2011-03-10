@@ -1267,3 +1267,5 @@ ALTER TABLE  `modules` ADD INDEX (  `Name` );
 
 UPDATE  `settings` SET  `TypeID` =  '10' WHERE  `ID` =  'Security_Image_Foreground_Color';
 UPDATE  `settings` SET  `TypeID` =  '10' WHERE  `ID` =  'Security_Image_Background_Color';
+
+ALTER TABLE  `dynamicforms` ADD  `LocaleFile` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFTER  `AutoResponseMessage`;
