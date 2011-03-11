@@ -1275,3 +1275,10 @@ CREATE TABLE IF NOT EXISTS `pageforms` (
   `FormID` smallint(5) unsigned NOT NULL DEFAULT '0',
   KEY `PageID` (`PageID`)
 ) ENGINE=MyISAM;
+
+ALTER TABLE  `notecomments` CHANGE  `Rating`  `Rating` SMALLINT NOT NULL DEFAULT  '0';
+UPDATE `notecomments` SET `Rating` = `Rating`-7 WHERE `Rating`;
+
+ALTER TABLE  `postcomments` CHANGE  `Rating`  `Rating` SMALLINT NOT NULL DEFAULT  '0';
+UPDATE `postcomments` SET `Rating` = `Rating`-7 WHERE `Rating`;
+
