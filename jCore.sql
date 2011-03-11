@@ -1269,3 +1269,9 @@ UPDATE  `settings` SET  `TypeID` =  '10' WHERE  `ID` =  'Security_Image_Foregrou
 UPDATE  `settings` SET  `TypeID` =  '10' WHERE  `ID` =  'Security_Image_Background_Color';
 
 ALTER TABLE  `dynamicforms` ADD  `LocaleFile` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFTER  `AutoResponseMessage`;
+
+CREATE TABLE IF NOT EXISTS `pageforms` (
+  `PageID` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `FormID` smallint(5) unsigned NOT NULL DEFAULT '0',
+  KEY `PageID` (`PageID`)
+) ENGINE=MyISAM;
