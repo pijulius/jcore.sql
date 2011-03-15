@@ -1255,8 +1255,6 @@ CREATE TABLE `usergrouppermissions` (
 ALTER TABLE  `users` ADD  `GroupID` SMALLINT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `ID` ,
 ADD INDEX (  `GroupID` );
 
-DELETE FROM `dynamicformfields` WHERE `Name` = 'BlockID' AND `Protected` = 1;
-
 ALTER TABLE  `dynamicforms` ADD  `SendAutoResponse` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `SendNotificationEmailTo` ,
 ADD  `AutoResponseFrom` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFTER  `SendAutoResponse` ,
 ADD  `AutoResponseSubject` VARCHAR( 255 ) NOT NULL DEFAULT  '' AFTER  `AutoResponseFrom` ,
@@ -1282,3 +1280,5 @@ UPDATE `notecomments` SET `Rating` = `Rating`-7 WHERE `Rating`;
 ALTER TABLE  `postcomments` CHANGE  `Rating`  `Rating` SMALLINT NOT NULL DEFAULT  '0';
 UPDATE `postcomments` SET `Rating` = `Rating`-7 WHERE `Rating`;
 
+UPDATE `dynamicformfields` SET `OrderID` = `OrderID`-1 WHERE `Name` = 'BlockID' AND `Protected`;
+UPDATE `dynamicformfields` SET `OrderID` = `OrderID`+1 WHERE `Name` = 'OnMainPage' AND `Protected`;
