@@ -1282,3 +1282,49 @@ UPDATE `postcomments` SET `Rating` = `Rating`-7 WHERE `Rating`;
 
 UPDATE `dynamicformfields` SET `OrderID` = `OrderID`-1 WHERE `Name` = 'BlockID' AND `Protected`;
 UPDATE `dynamicformfields` SET `OrderID` = `OrderID`+1 WHERE `Name` = 'OnMainPage' AND `Protected`;
+
+-- --------------------------------------------------------
+
+-- 
+-- Modification / Changes for ver. 0.9
+-- 
+
+ALTER TABLE  `pages` ADD INDEX (  `ViewableBy` );
+
+DROP TABLE IF EXISTS `menuitems`;
+CREATE TABLE IF NOT EXISTS `menuitems` (
+  `ID` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `Title` varchar(150) NOT NULL default '',
+  `Path` varchar(255) NOT NULL default '',
+  `Link` varchar(255) NOT NULL default '',
+  `Deactivated` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ViewableBy` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `SubMenuItemOfID` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `MenuID` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `LanguageID` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `OrderID` mediumint(9) NOT NULL DEFAULT '0',
+  `PageID` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`),
+  KEY `Deactivated` (`Deactivated`,`SubMenuItemOfID`,`OrderID`),
+  KEY `Path` (`Path`),
+  KEY `MenuID` (`MenuID`),
+  KEY `LanguageID` (`LanguageID`),
+  KEY `ViewableBy` (`ViewableBy`)
+) ENGINE=MyISAM;
+
+ALTER TABLE  `menus` ADD  `IncludeNewPages` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `Name`;
+UPDATE `menus` SET `IncludeNewPages` = 1 WHERE `ID` = 2;
+
+INSERT INTO `menuitems` 
+SELECT NULL, `Title`, `Path`, `Link`, `Deactivated`, `ViewableBy`, `SubPageOfID` AS `SubMenuItemOfID`, `MenuID`, `LanguageID`, `OrderID`, `ID` AS `PageID`
+FROM `pages` WHERE `MenuID` = 2;
+
+INSERT INTO `menuitems` 
+SELECT NULL, `Title`, `Path`, `Link`, `Deactivated`, `ViewableBy`, `SubPageOfID` AS `SubMenuItemOfID`, 1 AS `MenuID`, `LanguageID`, `OrderID`, `ID` AS `PageID`
+FROM `pages` WHERE `MenuID` = 2;
+
+UPDATE `menus` SET `OrderID` = `ID`;
+DELETE FROM `pages` WHERE `MenuID` = 1;
+
+ALTER TABLE  `pages` CHANGE  `ViewableBy`  `AccessibleBy` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0';
+ALTER TABLE  `pages` DROP  `Link` , DROP  `Hidden` , DROP  `MenuID`;
