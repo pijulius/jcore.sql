@@ -1328,3 +1328,7 @@ DELETE FROM `pages` WHERE `MenuID` = 1;
 
 ALTER TABLE  `pages` CHANGE  `ViewableBy`  `AccessibleBy` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0';
 ALTER TABLE  `pages` DROP  `Link` , DROP  `Hidden` , DROP  `MenuID`;
+
+INSERT INTO  `settings` (`ID` ,`Value` ,`TypeID` ,`OrderID`)
+VALUES ('Manual_Gettext',  '0',  '3',  '6');
+
