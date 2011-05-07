@@ -1332,3 +1332,13 @@ ALTER TABLE  `pages` DROP  `Link` , DROP  `Hidden` , DROP  `MenuID`;
 INSERT INTO  `settings` (`ID` ,`Value` ,`TypeID` ,`OrderID`)
 VALUES ('Manual_Gettext',  '0',  '3',  '6');
 
+ALTER TABLE  `bfprotection` CHANGE  `IP`  `IP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `bfprotectionbans` CHANGE  `IP`  `IP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `notecomments` CHANGE  `IP`  `IP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `notecommentsratings` CHANGE  `IP`  `IP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `postcomments` CHANGE  `IP`  `IP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `postcommentsratings` CHANGE  `IP`  `IP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `postratings` CHANGE  `IP`  `IP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `userlogins` CHANGE  `FromIP`  `FromIP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `userrequests` CHANGE  `FromIP`  `FromIP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `users` CHANGE  `IP`  `IP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
