@@ -1342,3 +1342,7 @@ ALTER TABLE  `postratings` CHANGE  `IP`  `IP` DECIMAL( 39, 0 ) NOT NULL DEFAULT 
 ALTER TABLE  `userlogins` CHANGE  `FromIP`  `FromIP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
 ALTER TABLE  `userrequests` CHANGE  `FromIP`  `FromIP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
 ALTER TABLE  `users` CHANGE  `IP`  `IP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
+
+ALTER TABLE  `modules` ADD  `Deactivated` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0',
+ADD INDEX (  `Deactivated` );
+
