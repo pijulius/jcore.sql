@@ -1346,3 +1346,6 @@ ALTER TABLE  `users` CHANGE  `IP`  `IP` DECIMAL( 39, 0 ) NOT NULL DEFAULT  '0';
 ALTER TABLE  `modules` ADD  `Deactivated` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0',
 ADD INDEX (  `Deactivated` );
 
+SELECT @postsformid := `ID` FROM `dynamicforms` WHERE `FormID` = 'posts';
+UPDATE  `dynamicformfields` SET  `OrderID` =  `OrderID`+1 WHERE  `FormID` = @postsformid AND `Name` = 'Keywords';
+UPDATE  `dynamicformfields` SET  `OrderID` =  `OrderID`-1 WHERE  `FormID` = @postsformid AND `Name` = 'URL';
