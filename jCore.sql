@@ -1349,3 +1349,11 @@ ADD INDEX (  `Deactivated` );
 SELECT @postsformid := `ID` FROM `dynamicforms` WHERE `FormID` = 'posts';
 UPDATE  `dynamicformfields` SET  `OrderID` =  `OrderID`+1 WHERE  `FormID` = @postsformid AND `Name` = 'Keywords';
 UPDATE  `dynamicformfields` SET  `OrderID` =  `OrderID`-1 WHERE  `FormID` = @postsformid AND `Name` = 'URL';
+
+ALTER TABLE  `modules` ADD  `jQueryPlugins` VARCHAR( 255 ) NOT NULL DEFAULT  '';
+ALTER TABLE  `templates` ADD  `jQueryPlugins` VARCHAR( 255 ) NOT NULL DEFAULT  '';
+ALTER TABLE  `templates` ADD  `Installed` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `Name`;
+UPDATE `templates` SET `Installed` = 1;
+
+ALTER TABLE  `modules` ADD INDEX (  `Installed` );
+ALTER TABLE  `templates` ADD INDEX (  `Installed` );
