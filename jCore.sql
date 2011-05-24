@@ -1372,3 +1372,7 @@ ADD INDEX (  `LanguageID` );
 
 ALTER TABLE  `posts` ADD  `NotSearchable` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `PartialContent` ,
 ADD INDEX (  `NotSearchable` );
+
+ALTER TABLE  `pages` CHANGE  `AccessibleBy`  `AccessibleBy` SMALLINT UNSIGNED NOT NULL DEFAULT  '0';
+ALTER TABLE  `blocks` CHANGE  `ViewableBy`  `ViewableBy` SMALLINT UNSIGNED NOT NULL DEFAULT  '0';
+ALTER TABLE  `menuitems` CHANGE  `ViewableBy`  `ViewableBy` SMALLINT UNSIGNED NOT NULL DEFAULT  '0';
