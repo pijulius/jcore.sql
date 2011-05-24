@@ -1357,3 +1357,6 @@ UPDATE `templates` SET `Installed` = 1;
 
 ALTER TABLE  `modules` ADD INDEX (  `Installed` );
 ALTER TABLE  `templates` ADD INDEX (  `Installed` );
+
+ALTER TABLE  `posts` ADD  `LanguageID` TINYINT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `BlockID` ,
+ADD INDEX (  `LanguageID` );
