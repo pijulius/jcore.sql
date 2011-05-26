@@ -1359,6 +1359,18 @@ INSERT INTO `dynamicformfields`
 (`FormID`, `Title`, `Name`, `TypeID`, `ValueType`, `Required`, `Searchable`, `PlaceholderText`, `TooltipText`, `AdditionalText`, `Attributes`, `Style`, `OrderID`, `Protected`) VALUES
 (@postsformid, 'Not Searchable', 'NotSearchable', 3, 10, 0, 0, '', '', '', '', '', 16, 1);
 
+ALTER TABLE  `posts` ADD  `NotSearchable` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `PartialContent` ,
+ADD INDEX (  `NotSearchable` );
+
+UPDATE `dynamicformfields` SET `OrderID` = `OrderID`+1 WHERE `FormID` = @postsformid AND `OrderID` >= 12;
+
+INSERT INTO `dynamicformfields` 
+(`FormID`, `Title`, `Name`, `TypeID`, `ValueType`, `Required`, `Searchable`, `PlaceholderText`, `TooltipText`, `AdditionalText`, `Attributes`, `Style`, `OrderID`, `Protected`) VALUES
+(@postsformid, 'Hide when Expired', 'HideExpired', 3, 10, 0, 0, '', '', '', '', '', 12, 1);
+
+ALTER TABLE  `posts` ADD  `HideExpired` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `EndDate` ,
+ADD INDEX (  `HideExpired` );
+
 ALTER TABLE  `modules` ADD  `jQueryPlugins` VARCHAR( 255 ) NOT NULL DEFAULT  '';
 ALTER TABLE  `templates` ADD  `jQueryPlugins` VARCHAR( 255 ) NOT NULL DEFAULT  '';
 ALTER TABLE  `templates` ADD  `Installed` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `Name`;
@@ -1369,9 +1381,6 @@ ALTER TABLE  `templates` ADD INDEX (  `Installed` );
 
 ALTER TABLE  `posts` ADD  `LanguageID` TINYINT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `BlockID` ,
 ADD INDEX (  `LanguageID` );
-
-ALTER TABLE  `posts` ADD  `NotSearchable` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `PartialContent` ,
-ADD INDEX (  `NotSearchable` );
 
 ALTER TABLE  `pages` CHANGE  `AccessibleBy`  `AccessibleBy` SMALLINT UNSIGNED NOT NULL DEFAULT  '0';
 ALTER TABLE  `blocks` CHANGE  `ViewableBy`  `ViewableBy` SMALLINT UNSIGNED NOT NULL DEFAULT  '0';
