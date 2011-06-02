@@ -1386,3 +1386,22 @@ ALTER TABLE  `pages` CHANGE  `AccessibleBy`  `AccessibleBy` SMALLINT UNSIGNED NO
 ALTER TABLE  `blocks` CHANGE  `ViewableBy`  `ViewableBy` SMALLINT UNSIGNED NOT NULL DEFAULT  '0';
 ALTER TABLE  `menuitems` CHANGE  `ViewableBy`  `ViewableBy` SMALLINT UNSIGNED NOT NULL DEFAULT  '0';
 ALTER TABLE  `dynamicformfields` CHANGE  `ViewableBy`  `ViewableBy` SMALLINT UNSIGNED NOT NULL DEFAULT  '0';
+
+DROP TABLE IF EXISTS `layouts`;
+CREATE TABLE IF NOT EXISTS `layouts` (
+  `ID` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `Title` varchar(150) NOT NULL default '',
+  `Deactivated` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `TemplateID` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `OrderID` mediumint(9) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`),
+  KEY `Deactivated` (`Deactivated`),
+  KEY `OrderID` (`OrderID`),
+  KEY `TemplateID` (`TemplateID`)
+) ENGINE=MyISAM;
+
+ALTER TABLE  `blocks` ADD  `LayoutID` SMALLINT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `TemplateID` ,
+ADD INDEX (  `LayoutID` );
+
+ALTER TABLE  `pages` ADD  `LayoutID` SMALLINT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `LanguageID` ,
+ADD INDEX (  `LayoutID` );
