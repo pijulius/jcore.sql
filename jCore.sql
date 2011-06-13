@@ -1440,3 +1440,8 @@ ADD INDEX (  `LayoutID` );
 
 ALTER TABLE  `pages` ADD  `LayoutID` SMALLINT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `LanguageID` ,
 ADD INDEX (  `LayoutID` );
+
+ALTER TABLE  `bfprotectionbans` ADD INDEX (  `EndTimeStamp` );
+ALTER TABLE  `pagemodules` ADD INDEX (  `ModuleID` );
+ALTER TABLE  `settings` ADD INDEX (  `TypeID` );
+ALTER TABLE  `dynamicforms` ADD INDEX (  `Protected` );
