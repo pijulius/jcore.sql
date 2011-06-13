@@ -1,13 +1,7 @@
 -- phpMyAdmin SQL Dump
--- version 2.9.0
 -- http://www.phpmyadmin.net
 -- 
 -- Host: localhost
--- Generation Time: Jul 24, 2009 at 03:09 PM
--- Server version: 5.0.67
--- PHP Version: 5.2.6
--- 
--- Database: `jcore_client`
 -- 
 
 -- --------------------------------------------------------
@@ -35,7 +29,10 @@ CREATE TABLE `ads` (
   PRIMARY KEY  (`ID`),
   KEY `ShowOn` (`ShowOn`),
   KEY `OrderID` (`OrderID`),
-  KEY `BlockID` (`BlockID`,`StartDate`,`EndDate`,`Deactivated`)
+  KEY `BlockID` (`BlockID`),
+  KEY `StartDate` (`StartDate`),
+  KEY `EndDate` (`EndDate`),
+  KEY `Deactivated` (`Deactivated`)
 ) ENGINE=MyISAM;
 
 -- 
@@ -107,7 +104,8 @@ CREATE TABLE `blocks` (
   PRIMARY KEY  (`ID`),
   KEY `SubBlockOfID` (`SubBlockOfID`),
   KEY `TypeID` (`TypeID`),
-  KEY `Deactivated` (`Deactivated`,`OrderID`),
+  KEY `Deactivated` (`Deactivated`),
+  KEY `OrderID` (`OrderID`),
   KEY `ViewableBy` (`ViewableBy`)
 ) ENGINE=MyISAM;
 
@@ -142,7 +140,8 @@ CREATE TABLE `dynamicformfields` (
   `OrderID` mediumint(9) NOT NULL default '0',
   `Protected` tinyint(1) unsigned NOT NULL default '0',
   PRIMARY KEY  (`ID`),
-  KEY `FormID` (`FormID`,`OrderID`)
+  KEY `FormID` (`FormID`),
+  KEY `OrderID` (`OrderID`)
 ) ENGINE=MyISAM;
 
 -- 
@@ -165,7 +164,8 @@ CREATE TABLE `dynamicformfieldvalues` (
   `Selected` tinyint(1) unsigned NOT NULL default '0',
   `OrderID` mediumint(9) NOT NULL default '0',
   PRIMARY KEY  (`ID`),
-  KEY `FieldID` (`FieldID`,`Selected`),
+  KEY `FieldID` (`FieldID`),
+  KEY `Selected` (`Selected`),
   KEY `OrderID` (`OrderID`)
 ) ENGINE=MyISAM;
 
@@ -262,7 +262,9 @@ CREATE TABLE `menuitems` (
   `OrderID` mediumint(9) NOT NULL default '0',
   PRIMARY KEY  (`ID`),
   KEY `Path` (`Path`),
-  KEY `Deactivated` (`Deactivated`,`SubMenuOfID`,`OrderID`),
+  KEY `Deactivated` (`Deactivated`),
+  KEY `SubMenuOfID` (`SubMenuOfID`),
+  KEY `OrderID` (`OrderID`),
   KEY `Hidden` (`Hidden`),
   KEY `MenuID` (`MenuID`),
   KEY `LanguageID` (`LanguageID`)
@@ -335,7 +337,7 @@ CREATE TABLE `postattachments` (
   `FileSize` int(10) unsigned NOT NULL default '0',
   `PostID` int(10) unsigned NOT NULL default '1',
   `Downloads` int(10) unsigned NOT NULL default '0',
-  KEY `ID` (`ID`),
+  PRIMARY KEY `ID` (`ID`),
   KEY `OrderID` (`OrderID`),
   KEY `PostID` (`PostID`),
   KEY `TimeStamp` (`TimeStamp`)
@@ -365,7 +367,8 @@ CREATE TABLE `postcomments` (
   `Rating` tinyint(1) unsigned NOT NULL default '0',
   PRIMARY KEY  (`ID`),
   KEY `TimeStamp` (`TimeStamp`),
-  KEY `PostID` (`PostID`,`UserName`),
+  KEY `PostID` (`PostID`),
+  KEY `UserName` (`UserName`),
   KEY `UserID` (`UserID`)
 ) ENGINE=MyISAM;
 
@@ -387,7 +390,10 @@ CREATE TABLE `postcommentsratings` (
   `IP` bigint(20) NOT NULL default '0',
   `TimeStamp` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `Rating` tinyint(1) NOT NULL default '0',
-  KEY `CommentID` (`CommentID`,`UserID`,`IP`,`TimeStamp`),
+  KEY `CommentID` (`CommentID`),
+  KEY `UserID` (`UserID`),
+  KEY `IP` (`IP`),
+  KEY `TimeStamp` (`TimeStamp`),
   KEY `Rating` (`Rating`)
 ) ENGINE=MyISAM;
 
@@ -411,7 +417,7 @@ CREATE TABLE `postpictures` (
   `TimeStamp` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `URL` varchar(255) NOT NULL default '',
   `PostID` int(10) unsigned NOT NULL default '1',
-  KEY `ID` (`ID`),
+  PRIMARY KEY `ID` (`ID`),
   KEY `OrderID` (`OrderID`),
   KEY `PostID` (`PostID`),
   KEY `TimeStamp` (`TimeStamp`)
@@ -452,9 +458,12 @@ CREATE TABLE `posts` (
   `UserID` mediumint(8) unsigned NOT NULL default '0',
   `OrderID` mediumint(9) NOT NULL default '0',
   PRIMARY KEY  (`ID`),
-  KEY `MenuID` (`MenuItemID`,`Deactivated`,`OrderID`),
+  KEY `MenuID` (`MenuItemID`),
+  KEY `Deactivated` (`Deactivated`),
+  KEY `OrderID` (`OrderID`),
   KEY `OnMainPage` (`OnMainPage`),
-  KEY `StartDate` (`StartDate`,`EndDate`),
+  KEY `StartDate` (`StartDate`),
+  KEY `EndDate` (`EndDate`),
   KEY `Path` (`Path`),
   KEY `BlockID` (`BlockID`),
   KEY `UserID` (`UserID`)
@@ -572,7 +581,7 @@ CREATE TABLE `userlogins` (
   `TimeStamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `KeepIt` tinyint(4) NOT NULL default '0',
   KEY `UserID` (`UserID`),
-  KEY `ID` (`SessionID`)
+  KEY `SessionID` (`SessionID`)
 ) ENGINE=MyISAM;
 
 -- 
@@ -593,7 +602,8 @@ CREATE TABLE `userpermissions` (
   `Path` varchar(255) NOT NULL default '',
   `PermissionTypeID` tinyint(3) unsigned NOT NULL default '0',
   PRIMARY KEY  (`ID`),
-  KEY `UserID` (`UserID`,`Path`)
+  KEY `UserID` (`UserID`),
+  KEY `Path` (`Path`)
 ) ENGINE=MyISAM;
 
 -- 
@@ -614,7 +624,9 @@ CREATE TABLE `userrequests` (
   `RequestTypeID` tinyint(3) unsigned NOT NULL default '0',
   `RequestID` varchar(100) NOT NULL default '',
   `FromIP` bigint(20) NOT NULL default '0',
-  KEY `UserID` (`UserID`,`TimeStamp`,`RequestID`),
+  KEY `UserID` (`UserID`),
+  KEY `TimeStamp` (`TimeStamp`),
+  KEY `RequestID` (`RequestID`),
   KEY `FromIP` (`FromIP`)
 ) ENGINE=MyISAM;
 
@@ -644,7 +656,9 @@ CREATE TABLE `users` (
   `Suspended` tinyint(1) unsigned NOT NULL default '0',
   `DisableNotificationEmails` tinyint(1) unsigned NOT NULL default '0',
   PRIMARY KEY  (`ID`),
-  KEY `UserName` (`UserName`,`Email`,`TimeStamp`),
+  KEY `UserName` (`UserName`),
+  KEY `Email` (`Email`),
+  KEY `TimeStamp` (`TimeStamp`),
   KEY `Admin` (`Admin`),
   KEY `Suspended` (`Suspended`)
 ) ENGINE=MyISAM;
@@ -665,15 +679,17 @@ INSERT INTO `users` (`ID`, `UserName`, `Password`, `Email`, `Website`, `TimeStam
 
 DROP TABLE IF EXISTS `massemails`;
 CREATE TABLE `massemails` (
-`ID` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`UserID` MEDIUMINT UNSIGNED NOT NULL default '0' ,
-`From` VARCHAR( 255 ) NOT NULL default '' ,
-`To` TEXT NULL,
-`Subject` VARCHAR( 255 ) NOT NULL default '' ,
-`Message` MEDIUMTEXT NULL,
-`TimeStamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-`EmailsSentOut` MEDIUMINT UNSIGNED NOT NULL default '0' ,
-INDEX ( `TimeStamp`, `UserID` )
+  `ID` MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `UserID` MEDIUMINT UNSIGNED NOT NULL default '0' ,
+  `From` VARCHAR( 255 ) NOT NULL default '' ,
+  `To` TEXT NULL,
+  `Subject` VARCHAR( 255 ) NOT NULL default '' ,
+  `Message` MEDIUMTEXT NULL,
+  `TimeStamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  `EmailsSentOut` MEDIUMINT UNSIGNED NOT NULL default '0' ,
+  PRIMARY KEY  (`ID`),
+  KEY `TimeStamp` (`TimeStamp`),
+  KEY `UserID` (`UserID`)
 ) ENGINE = MYISAM ;
 
 INSERT INTO `settings` (
@@ -773,7 +789,7 @@ CREATE TABLE `noteattachments` (
   `FileSize` int(10) unsigned NOT NULL default '0',
   `NoteID` int(10) unsigned NOT NULL default '1',
   `Downloads` int(10) unsigned NOT NULL default '0',
-  KEY `ID` (`ID`),
+  PRIMARY KEY `ID` (`ID`),
   KEY `OrderID` (`OrderID`),
   KEY `NoteID` (`NoteID`),
   KEY `TimeStamp` (`TimeStamp`)
@@ -792,7 +808,8 @@ CREATE TABLE `notecomments` (
   `Rating` tinyint(1) unsigned NOT NULL default '0',
   PRIMARY KEY  (`ID`),
   KEY `TimeStamp` (`TimeStamp`),
-  KEY `NoteID` (`NoteID`,`UserName`),
+  KEY `NoteID` (`NoteID`),
+  KEY `UserName` (`UserName`),
   KEY `UserID` (`UserID`)
 ) ENGINE=MyISAM;
 
@@ -803,7 +820,10 @@ CREATE TABLE `notecommentsratings` (
   `IP` bigint(20) NOT NULL default '0',
   `TimeStamp` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `Rating` tinyint(1) NOT NULL default '0',
-  KEY `CommentID` (`CommentID`,`UserID`,`IP`,`TimeStamp`),
+  KEY `CommentID` (`CommentID`),
+  KEY `UserID` (`UserID`),
+  KEY `IP` (`IP`),
+  KEY `TimeStamp` (`TimeStamp`),
   KEY `Rating` (`Rating`)
 ) ENGINE=MyISAM;
 
@@ -964,7 +984,18 @@ ADD `EnableRating` tinyint(1) unsigned NOT NULL default '0' AFTER `Rating`,
 ADD `EnableGuestRating` tinyint(1) unsigned NOT NULL default '0' AFTER `EnableRating`;
 
 DROP TABLE IF EXISTS `postratings`;
-CREATE TABLE `postratings` (`PostID` int(10) unsigned NOT NULL default '0', `UserID` mediumint(8) unsigned NOT NULL default '0', `IP` bigint(20) NOT NULL default '0', `TimeStamp` timestamp NOT NULL default CURRENT_TIMESTAMP, `Rating` tinyint(1) NOT NULL default '0', KEY `Rating` (`Rating`), KEY `PostID` (`PostID`,`UserID`,`IP`,`TimeStamp`) ) ENGINE=MyISAM;
+CREATE TABLE `postratings` (
+  `PostID` int(10) unsigned NOT NULL default '0',
+  `UserID` mediumint(8) unsigned NOT NULL default '0',
+  `IP` bigint(20) NOT NULL default '0',
+  `TimeStamp` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `Rating` tinyint(1) NOT NULL default '0',
+  KEY `Rating` (`Rating`),
+  KEY `PostID` (`PostID`),
+  KEY `UserID` (`UserID`),
+  KEY `IP` (`IP`),
+  KEY `TimeStamp` (`TimeStamp`)
+) ENGINE=MyISAM;
 
 ALTER TABLE  `posts` ADD  `URL` VARCHAR( 255 ) NOT NULL default '' AFTER  `Path`;
 
@@ -1009,7 +1040,8 @@ CREATE TABLE `blocks` (
   PRIMARY KEY (`ID`),
   KEY `SubBlockOfID` (`SubBlockOfID`),
   KEY `TypeID` (`TypeID`),
-  KEY `Deactivated` (`Deactivated`,`OrderID`),
+  KEY `Deactivated` (`Deactivated`),
+  KEY `OrderID` (`OrderID`),
   KEY `ViewableBy` (`ViewableBy`)
 ) ENGINE=MyISAM;
 
@@ -1249,7 +1281,8 @@ CREATE TABLE `usergrouppermissions` (
   `Path` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `PermissionTypeID` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`),
-  KEY `UserID` (`GroupID`,`Path`)
+  KEY `UserID` (`GroupID`),
+  KEY `Path` (`Path`)
 ) ENGINE=MyISAM;
 
 ALTER TABLE  `users` ADD  `GroupID` SMALLINT UNSIGNED NOT NULL DEFAULT  '0' AFTER  `ID` ,
@@ -1305,7 +1338,9 @@ CREATE TABLE IF NOT EXISTS `menuitems` (
   `OrderID` mediumint(9) NOT NULL DEFAULT '0',
   `PageID` mediumint(8) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`),
-  KEY `Deactivated` (`Deactivated`,`SubMenuItemOfID`,`OrderID`),
+  KEY `Deactivated` (`Deactivated`),
+  KEY `SubMenuItemOfID` (`SubMenuItemOfID`),
+  KEY `OrderID` (`OrderID`),
   KEY `Path` (`Path`),
   KEY `MenuID` (`MenuID`),
   KEY `LanguageID` (`LanguageID`),
