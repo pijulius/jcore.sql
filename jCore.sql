@@ -1246,8 +1246,12 @@ INSERT INTO `blocks` (`ID`, `Title`, `Content`, `BlockID`, `Class`, `Deactivated
 -- Modification / Changes for ver. 0.8
 -- 
 
+DROP TABLE IF EXISTS `pages`;
 RENAME TABLE `menuitems` TO `pages`;
+
+DROP TABLE IF EXISTS `pagemodules`;
 RENAME TABLE `menuitemmodules` TO `pagemodules`;
+
 ALTER TABLE  `pages` CHANGE  `SubMenuOfID`  `SubPageOfID` MEDIUMINT( 8 ) UNSIGNED NOT NULL DEFAULT  '0';
 ALTER TABLE  `pagemodules` CHANGE  `MenuItemID`  `PageID` MEDIUMINT( 8 ) UNSIGNED NOT NULL DEFAULT  '0';
 
