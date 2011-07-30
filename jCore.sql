@@ -1453,3 +1453,4 @@ ALTER TABLE  `dynamicforms` ADD INDEX (  `Protected` );
 ALTER TABLE  `postkeywords` ADD INDEX (  `Keyword` );
 ALTER TABLE  `postcomments` ADD INDEX (  `SubCommentOfID` );
 ALTER TABLE  `notecomments` ADD INDEX (  `SubCommentOfID` );
+ALTER TABLE  `menuitems` ADD INDEX (  `PageID` );
