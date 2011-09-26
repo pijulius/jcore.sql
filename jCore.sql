@@ -1454,3 +1454,19 @@ ALTER TABLE  `postkeywords` ADD INDEX (  `Keyword` );
 ALTER TABLE  `postcomments` ADD INDEX (  `SubCommentOfID` );
 ALTER TABLE  `notecomments` ADD INDEX (  `SubCommentOfID` );
 ALTER TABLE  `menuitems` ADD INDEX (  `PageID` );
+
+-- --------------------------------------------------------
+
+-- 
+-- Modification / Changes for ver. 1.0
+-- 
+
+INSERT INTO `settings` (`ID` ,`Value` ,`TypeID` ,`OrderID`)
+VALUES 
+('Use_reCaptcha', '', '3', '10'),
+('reCaptcha_Public_Key', '', '1', '10'),
+('reCaptcha_Private_Key', '', '1', '10'),
+('reCaptcha_Theme', '', '1', '10'),
+('reCaptcha_Lang', '', '1', '10');
+
+
