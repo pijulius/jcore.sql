@@ -1469,4 +1469,8 @@ VALUES
 ('reCaptcha_Theme', '', '1', '10'),
 ('reCaptcha_Lang', '', '1', '10');
 
+INSERT INTO `settings` (`ID` ,`Value` ,`TypeID` ,`OrderID`)
+VALUES 
+('Paginated_Comments', '', '3', '8'),
+('Comments_Per_Page', '10', '1', '8');
 
