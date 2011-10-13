@@ -1482,3 +1482,8 @@ ADD INDEX ( `Priority` ) ;
 ALTER TABLE `dynamicforms` ADD `StorageDirectory` VARCHAR( 100 ) NOT NULL DEFAULT '' AFTER `LocaleFile` ,
 ADD `ProtectedStorage` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT '0' AFTER `StorageDirectory`; 
 
+INSERT INTO `settings` (`ID`, `Value`, `TypeID`, `OrderID`)
+VALUES (
+'HTML_Emails', '', '3', '7'
+);
+
