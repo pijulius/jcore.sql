@@ -1474,3 +1474,11 @@ VALUES
 ('Paginated_Comments', '', '3', '8'),
 ('Comments_Per_Page', '10', '1', '8');
 
+ALTER TABLE `menus` CHANGE `BlockID` `BlockIDs` VARCHAR( 255 ) NOT NULL DEFAULT '';
+
+ALTER TABLE `usergroups` ADD `Priority` SMALLINT UNSIGNED NOT NULL DEFAULT '0',
+ADD INDEX ( `Priority` ) ;
+
+ALTER TABLE `dynamicforms` ADD `StorageDirectory` VARCHAR( 100 ) NOT NULL DEFAULT '' AFTER `LocaleFile` ,
+ADD `ProtectedStorage` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT '0' AFTER `StorageDirectory`; 
+
