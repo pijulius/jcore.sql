@@ -1471,6 +1471,10 @@ VALUES
 
 INSERT INTO `settings` (`ID` ,`Value` ,`TypeID` ,`OrderID`)
 VALUES 
+('Disable_Links_in_Comments', '', '3', '8');
+
+INSERT INTO `settings` (`ID` ,`Value` ,`TypeID` ,`OrderID`)
+VALUES 
 ('Paginated_Comments', '', '3', '8'),
 ('Comments_Per_Page', '10', '1', '8');
 
